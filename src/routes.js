@@ -3,6 +3,8 @@ import React from 'react'
 
 import CategoriaList from './components/categoria/List'
 import CategoriaForm from './components/categoria/Form'
+import FacultadList from './components/facultad/List'
+import FacultadForm from './components/facultad/Form'
 
 import { RouteWithSubRoutes } from 'react-router-dom-ext'
 
@@ -81,8 +83,44 @@ const routes = [
             //title: 'edit cat!',
             component: CategoriaForm
           }
-        ]
+
+        ],
+
+
+        
+
+        
+      },
+
+      {
+        path: '/maptracking/facultades',
+        //title: 'facultades!',
+        component: Tacos,
+        routes: [
+          {
+            path: '/maptracking/facultades/list',
+            //title: 'list cat!',
+            component: FacultadList
+          },
+          {
+            path: '/maptracking/facultades/new',
+            //title: 'new cat!',
+            component: FacultadForm
+          },
+          {
+            path: '/maptracking/facultades/edit/:id',
+            //title: 'edit cat!',
+            component: FacultadForm
+          }
+
+        ],
+
+
+        
+
+        
       }
+
     ]
   }
 ]

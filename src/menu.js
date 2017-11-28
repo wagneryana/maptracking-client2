@@ -72,18 +72,18 @@ const menus = [
 
       },
       {
-        path: '/maptracking/autors',
-        title: 'autors!',
-        replace: '/maptracking/autors/list',
+        path: '/maptracking/facultades',
+        title: 'facultades!',
+        replace: '/maptracking/facultades/list',
         icon: 'qq',
         routes: [
           {
-            path: '/maptracking/autors/list',
-            title: 'list autors!',
+            path: '/maptracking/facultades/list',
+            title: 'list facultades!',
           },
           {
-            path: '/maptracking/autors/list2',
-            title: 'new autors2',
+            path: '/maptracking/facultades/list2',
+            title: 'new facultad2',
           }
         ]
       }

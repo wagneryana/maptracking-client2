@@ -13,8 +13,8 @@ import Divider from 'material-ui/Divider';
 import { save, getById, update } from '../../actions/categoria-action'
 
 
-
 class Form extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
