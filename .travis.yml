@@ -10,11 +10,12 @@ script:
   - react-scripts test --env=jsdom
 
 before_install:
-  - npm install codecov.io coveralls coverage
+  - npm install codecov.io coveralls
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - coverage report
 
 branches:
   only:
