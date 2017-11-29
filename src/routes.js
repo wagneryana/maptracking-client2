@@ -8,65 +8,36 @@ import FacultadForm from './components/facultad/Form'
 
 import { RouteWithSubRoutes } from 'react-router-dom-ext'
 
-////
-
-
-
 
 const Home = () => (
   <div>
-    <h2>Home</h2>
+    <h2>Inicio</h2>
   </div>
 )
-const Sandwiches = () => <h2>Sandwiches</h2>
 
-const Tacos = ({ routes }) => (
+const Mapa = ({ routes }) => (
   <div>
     {routes.map((route, i) => (
       <RouteWithSubRoutes key={i} {...route} />
     ))}
   </div>
 )
-const Bus = () => <h3>Bus</h3>
-const Cart = () => <h3>Cart</h3>
 
 const routes = [
   {
-    path: '/home',
+    path: '/inicio',
     //title: 'Home!',
     component: Home
   },
   {
-    path: '/sandwiches',
-    //title: 'sandwiches!',
-    component: Sandwiches
-  },
-  {
-    path: '/tacos',
-    //title: 'tacos!',
-    component: Tacos,
-    routes: [
-      {
-        path: '/tacos/bus',
-        //title: 'bus!',
-        component: Bus
-      },
-      {
-        path: '/tacos/cart',
-        //title: 'cart!',
-        component: Cart
-      }
-    ]
-  },
-  {
     path: '/maptracking',
     //title: 'maptracking!',
-    component: Tacos,
+    component: Mapa,
     routes: [
       {
         path: '/maptracking/categorias',
         //title: 'categorias!',
-        component: Tacos,
+        component: Mapa,
         routes: [
           {
             path: '/maptracking/categorias/list',
@@ -86,16 +57,12 @@ const routes = [
 
         ],
 
-
-        
-
-        
       },
 
       {
         path: '/maptracking/facultades',
         //title: 'facultades!',
-        component: Tacos,
+        component: Mapa,
         routes: [
           {
             path: '/maptracking/facultades/list',
@@ -112,13 +79,7 @@ const routes = [
             //title: 'edit cat!',
             component: FacultadForm
           }
-
         ],
-
-
-        
-
-        
       }
 
     ]
@@ -126,82 +87,3 @@ const routes = [
 ]
 
 export { routes }
-
-
-
-
-
-
-/*
-//import { Redirect } from 'react-router'
-import {
-  Route,
-  Redirect
-
-} from 'react-router-dom'
-class Tacos2x extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirect: false,
-    }
-    props.history.push(props.routes[0].path)
-
-  }
-  componentWillMount = () => {
-
-   // this.props.history.push('/categorias/list/list')
-
-  }
-  componentDidMount = () => {
-
-    this.setState({
-      redirect: true,
-    })
-  }
-  handleClick = () => {
-    if (this.state.redirect) {
-      this.props.history.push(this.props.routes[0].path)
-    }
-  }
-
-  render() {
-    //console.log(JSON.stringify(this.props))
-    const { routes, history } = this.props
-    //console.log(JSON.stringify(routes[0].path))
-    //history.push('/categorias/list/list');
-    //console.log(JSON.stringify(this.state.redirect))
-    
-       // if (this.state.redirect) {
-    
-         // this.props.history.push('/categorias/list/list')
-    
-        //} 
-    
-    return (
-      <div>
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
-        
-        <button onClick={this.handleClick}>
-                        Volver
-                    </button>
-      </div>
-    )
-    
-  }
-
-}
-
-const Tacos2p = ({ routes }) => (
-  <div>
-    {routes.map((route, i) => (
-      <RouteWithSubRoutes key={i} {...route} />
-    ))}
-    
-
-  </div>
-)
-*/

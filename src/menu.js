@@ -1,50 +1,10 @@
 
 const menus = [
   {
-    path: '/home',
-    title: 'Home!',
+    path: '/Inicio',
+    title: 'Inicio!',
     icon: 'home',
-  },
-  {
-    path: '/sandwiches',
-    title: 'sandwiches!',
-    icon: 'fa',
-  },
-  {
-    path: '/tacos',
-    title: 'tacos!',
-    icon: 'list',
-    routes: [
-      {
-        path: '/tacos/bus',
-        title: 'bus!',
-        icon: 'list',
-      },
-      {
-        path: '/tacos/cart',
-        title: 'cart!',
-        icon: 'yelp',
-      }
-    ]
-  },
-  
-  {
-    path: '/xtacos2',
-    title: 'tacos2!',
-    icon: 'list',
-    routes: [
-      {
-        path: '/xtacos2/bus2',
-        title: 'bus2!',
-        icon: 'gg',
-      },
-      {
-        path: '/xtacos2/cart2',
-        title: 'cart2!',
-        icon: 'send',
-      }
-    ]
-  },
+  },  
   {
     path: '/maptracking',
     title: 'maptracking!',
@@ -52,7 +12,7 @@ const menus = [
     routes: [
       {
         path: '/maptracking/categorias',
-        title: 'categorias!',
+        title: 'Categoria!',
         replace: '/maptracking/categorias/list',
         icon: 'usb',
         routes: [
@@ -73,17 +33,21 @@ const menus = [
       },
       {
         path: '/maptracking/facultades',
-        title: 'facultades!',
+        title: 'Perfil!',
         replace: '/maptracking/facultades/list',
-        icon: 'qq',
+        icon: 'cart-plus',
         routes: [
           {
             path: '/maptracking/facultades/list',
-            title: 'list facultades!',
+            title: 'list Perfils!',
           },
           {
-            path: '/maptracking/facultades/list2',
-            title: 'new facultad2',
+            path: '/maptracking/facultades/new',
+            title: 'new perfil',
+          },
+          {
+            path: '/maptracking/facultades/edit/:id',
+            title: 'edit perfil!',
           }
         ]
       }

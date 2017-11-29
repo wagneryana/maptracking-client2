@@ -1,67 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import Avatar from 'material-ui/Avatar'
-//import Typography from 'material-ui/Typography'
-//import TextField from 'material-ui/TextField';
-
-import { save, getById, update } from '../../actions/facultad-action'
 import { connect } from 'react-redux'
 
+import { withStyles } from 'material-ui/styles';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import TextField from 'material-ui/TextField';
+
+import Button from 'material-ui/Button';
+
+import Divider from 'material-ui/Divider';
+
+import { save, getById, update } from '../../actions/facultad-action'
+
+
 class Form extends Component {
-    /*
-        constructor(props) {
-            super(props);
-            this.state = {
-                d: {
-                    codigo: '',
-                    nombre: '',
-                },
-                saving: false
-            }
-        }*/
+
     constructor(props) {
         super(props);
         this.state = {
             id: props.data ? props.data.id : null,
             FCE: props.data ? props.data.FCE : '',
             FIA: props.data ? props.data.FIA : ''
-        }
-    }
-    /*
-        componentWillReceiveProps = (nextProps) => { // Load Asynchronously
-            const { data } = nextProps;
-            console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-            this.setState({
-                id: data.id,
-                codigo: data.codigo,
-                nombre: data.nombre
-            })
-        }
-    */
-    componentWillMount = () => {
-        /*
-        const { id } = this.props.match.params
-        if (id) {
-            //this.props.getById(id)
-            //this.props.getItemAsync(id)
-
-            this.props.getById(id).then(data => {
-                console.log('componentWillReceiveProps data:' + JSON.stringify(data))
-                this.setState({
-                    id: data.id,
-                    codigo: data.codigo,
-                    nombre: data.nombre
-                })
-            }).catch(e => {
-
-            });
-        }
-        */
+        }/*
+        this.state = {
+            id:  null,
+            codigo:'',
+            nombre: ''
+        }*/
     }
 
-
-    componentDidMount = () => {
+    componentDidMount() {
         const { id } = this.props.match.params
         if (id) {
             this.props.getById(id).then(data => {
@@ -72,59 +40,64 @@ class Form extends Component {
                 });
             });
         }
-    }
 
-    handleChange = (event) => {
-        //this.setState({ value: event.target.value });
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    }
+    handleInputChange = event => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
 
         this.setState({
             [name]: value
-        });
-    }
+        })
 
-    handleSubmit = (event) => {
+    }
+    handleSubmit = event => {
+        event.preventDefault()
+        console.log('d=' + JSON.stringify(this.state))
+
         const { id } = this.props.match.params
         if (id) {
-            //console.log('handleSubmit state:' + JSON.stringify(this.state))
-            this.props.update(this.state, this.props.history)
+            this.props.update(this.state, this.props.history).then(r => {
+                r.push('/maptracking/facultades/list')
+            }, error => {
+                throw (error)
+            })
         } else {
-            this.props.save(this.state, this.props.history)
+            this.props.save(this.state, this.props.history).then(r => {
+                r.push('/maptracking/facultades/list')
+            }, error => {
+                throw (error)
+            })
         }
-        //this.props.history.push('/categorias/list');
-        event.preventDefault();
     }
 
     render() {
-        //const { data } = this.props
+        //console.log(JSON.stringify(this.props))
+        //const { list } = this.props
         return (
-            <Card>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" >
-                            R
-                          </Avatar>
-                    }
-                    title="User Form"
-                    subheader="Users Form"
-                />
-                <CardContent>
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Fce:
-                            <input type="text" name="FCE" value={this.state.FCE} onChange={this.handleChange} />
-                        </label>
-                        <br />
-                        <input type="submit" value="Submit" />
-                    </form>
-                </CardContent>
-            </Card>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <TextField
+
+                        label="FCE"
+                        value={this.state.FCE}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                        name="codigo"
+                    />
+                    
+                    <Divider light />
+                    <Button raised color="primary" type="submit" value="Submit">
+                        Guardar
+                    </Button>
+
+                </form>
+
+            </div>
         )
     }
 }
-
 Form.propTypes = {
     data: PropTypes.object
 }
@@ -132,7 +105,7 @@ Form.propTypes = {
 const mapStateToProps = (state, props) => {
     if (props.match.params.id) {
         return {
-            data: state.facultad.list.find(item => item.id + '' === props.match.params.id + '')
+            data: state.categoria.list.find(item => item.id + '' === props.match.params.id + '')
         }
     }
     return {
@@ -140,19 +113,8 @@ const mapStateToProps = (state, props) => {
     }
 
 }
-/*
-const mapDispatchToProps = (dispatch) => {
-    return {
-        save: (d, h) => { dispatch(save(d, h)) },
-        getList: (q) => { dispatch(getList(q)) },
-        getById: (id) => { dispatch(getById(id)) },
-        update: (d, h) => { dispatch(update(d, h)) },
-    }
-}
-*/
 export default connect(mapStateToProps, {
     save,
     getById,
     update
-
 })(Form)
