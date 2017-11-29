@@ -4,6 +4,12 @@ language: node_js
 node_js:
   - 6
 
+script:
+
+  - coverage run --source=habitica_slack npm test
+  - coverage run npm test
+  - coverage report
+
 before_install:
   - npm install codecov.io coveralls
 
