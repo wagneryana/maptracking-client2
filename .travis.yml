@@ -4,11 +4,13 @@ language: node_js
 node_js:
   - 6
 
+
+
 script:
   - react-scripts test --env=jsdom
 
 before_install:
-  - npm install codecov.io coveralls
+  - npm install codecov.io coveralls coverage
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
